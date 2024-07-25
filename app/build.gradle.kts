@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation(files("libs/TarsosDSP-2.4.jar"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
