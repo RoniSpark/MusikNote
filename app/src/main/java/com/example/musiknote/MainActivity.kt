@@ -10,13 +10,33 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import be.tarsos.dsp.AudioProcessor
+import be.tarsos.dsp.io.android.AudioDispatcherFactory
+import be.tarsos.dsp.pitch.PitchDetectionHandler
+import be.tarsos.dsp.pitch.PitchProcessor
+import be.tarsos.dsp.pitch.PitchProcessor.PitchEstimationAlgorithm
 
 class MainActivity : AppCompatActivity() {
     private lateinit var startRecordingButton: Button
     private lateinit var stopRecordingButton: Button
-    private lateinit var result: TextView
+    private lateinit var result_tv: TextView
     private lateinit var mediaRecorder: MediaRecorder
     private var isRecording = false
+
+    fun clickStartRecording(){
+        val dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050, 1024, 0)
+
+        val pdh = PitchDetectionHandler { result, e ->
+            val pitchInHz = result.pitch
+            runOnUiThread {
+                result_tv.text = "" + pitchInHz
+            }
+        }
+        val p: AudioProcessor = PitchProcessor(PitchEstimationAlgorithm.FFT_YIN, 22050f, 1024, pdh)
+        dispatcher.addAudioProcessor(p)
+        Thread(dispatcher, "Audio Dispatcher").start()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +44,9 @@ class MainActivity : AppCompatActivity() {
 
         startRecordingButton = findViewById(R.id.button_start_recording)
         stopRecordingButton = findViewById(R.id.button_stop_recording)
-        result = findViewById(R.id.result)
+        result_tv = findViewById(R.id.result_tv)
 
-/*
+
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.RECORD_AUDIO
@@ -41,10 +61,11 @@ class MainActivity : AppCompatActivity() {
                 android.Manifest.permission.READ_EXTERNAL_STORAGE
             )
             ActivityCompat.requestPermissions(this, permissions, 0)
-        }*/
+        }
 
         startRecordingButton.setOnClickListener {
-            result.setText("yes")
+            clickStartRecording()
+
         }
     }
 }
