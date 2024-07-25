@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textview_sound_recorder_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Record your sound"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_start_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="35dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_centerVertical="true"/>
+
+
+        <Button
+            android:id="@+id/button_stop_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="125dp"
+            android:layout_marginBottom="32dp"
+            android:text="Stop" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textview_frekvence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The fractionation of your sound:"
+        android:textSize="23dp"
+        android:textColor="#000"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="25dp"
+        />
+
+    <TextView
+        android:id="@+id/result_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:textSize="24sp"
+        android:layout_margin="20dp"
+        android:gravity="center"/>
+
+
+</LinearLayout>
